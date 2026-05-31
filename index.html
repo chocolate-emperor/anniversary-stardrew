@@ -3,14 +3,23 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-        <!-- 微信 / 移动端适配 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 微信 / 移动端适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- iOS WebApp -->
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- 安卓状态栏颜色 -->
     <meta name="theme-color" content="#000000">
+
+    <!-- 微信 / 社交分享卡片 -->
+    <meta property="og:title" content="周年纪念 ✨">
+    <meta property="og:description" content="属于我们的纪念日网页">
+    <meta property="og:image" content="https://chocolate-emperor.github.io/anniversary-stardrew/preview.png">
+
+    <!-- 移动端细节优化 -->
+    <meta name="format-detection" content="telephone=no">
     <title>星露谷·恋爱周年纪念 | 我们的像素回忆录</title>
     <style>
         /* ================= 像素基础重置 & 星露谷风格 ================= */
@@ -640,6 +649,231 @@ h1, h2, h3,
     }
 }
 
+/* ===== 手机端体验优化：微信 H5 适配 ===== */
+html {
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    touch-action: manipulation;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    width: min(100%, 1100px);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-image-stage img,
+.photo-frame img,
+img[alt="像素作物"] {
+    display: block;
+    width: 100%;
+    height: auto !important;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1rem 0.75rem 4.5rem !important;
+        border-left-width: 4px !important;
+        border-right-width: 4px !important;
+        box-shadow: none !important;
+    }
+
+    section {
+        margin-bottom: 1.4rem !important;
+        padding: 1rem 0.85rem !important;
+        border-width: 4px !important;
+        box-shadow:
+            inset 0 0 0 2px #d7b277,
+            4px 4px 0 rgba(0,0,0,0.24) !important;
+    }
+
+    section:hover {
+        transform: none !important;
+        box-shadow:
+            inset 0 0 0 2px #d7b277,
+            4px 4px 0 rgba(0,0,0,0.24) !important;
+    }
+
+    h1,
+    .stardew,
+    .stardrew {
+        font-size: clamp(1.35rem, 7vw, 2.3rem) !important;
+        line-height: 1.25 !important;
+        letter-spacing: 1px !important;
+        text-align: center !important;
+        word-break: keep-all;
+    }
+
+    h2 {
+        font-size: clamp(1.05rem, 5vw, 1.45rem) !important;
+        line-height: 1.35 !important;
+        padding-left: 0.65rem !important;
+        border-left-width: 6px !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-area {
+        padding-top: 1rem !important;
+    }
+
+    .hero-copy {
+        gap: 0.8rem !important;
+    }
+
+    .hero-image-stage {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 1rem !important;
+        padding: 0.45rem !important;
+        box-shadow: inset 0 0 0 2px #6a4727, 4px 4px 0 rgba(0,0,0,0.24) !important;
+    }
+
+    .hero-image-stage::before {
+        inset: 6px !important;
+    }
+
+    .days-counter {
+        min-width: 0 !important;
+        width: auto !important;
+        max-width: 90vw !important;
+        padding: 0.55rem 1.2rem !important;
+        font-size: clamp(2rem, 13vw, 3.5rem) !important;
+        line-height: 1 !important;
+    }
+
+    .days-label,
+    .start-hint,
+    .hero-area > div[style],
+    .footer-pixel {
+        font-size: clamp(0.75rem, 3.5vw, 0.95rem) !important;
+        line-height: 1.7 !important;
+    }
+
+    .start-hint {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0.65rem 0.75rem !important;
+    }
+
+    .memories-grid {
+        gap: 1.2rem !important;
+    }
+
+    .memory-item,
+    .memory-item:nth-child(even) {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.9rem !important;
+        padding: 0.8rem !important;
+        text-align: left !important;
+    }
+
+    .photo-frame {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: none !important;
+        padding: 8px !important;
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.28) !important;
+    }
+
+    .memory-caption {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+        padding: 0.85rem !important;
+        font-size: clamp(0.88rem, 3.7vw, 1rem) !important;
+        line-height: 1.65 !important;
+        border-left-width: 4px !important;
+    }
+
+    .memory-caption p {
+        line-height: 1.65 !important;
+    }
+
+    .love-letter {
+        padding: 1rem 0.65rem !important;
+    }
+
+    .letter-content {
+        max-width: 100% !important;
+        padding: 1rem !important;
+    }
+
+    .letter-content p {
+        font-size: clamp(0.9rem, 3.8vw, 1rem) !important;
+        line-height: 1.75 !important;
+    }
+
+    .signature {
+        font-size: clamp(0.9rem, 4vw, 1.05rem) !important;
+        text-align: left !important;
+    }
+
+    .music-player {
+        right: max(0.75rem, env(safe-area-inset-right)) !important;
+        bottom: max(0.75rem, env(safe-area-inset-bottom)) !important;
+        padding: 0.45rem 0.75rem !important;
+        gap: 0.45rem !important;
+        border-width: 2px !important;
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.35) !important;
+    }
+
+    .music-icon {
+        font-size: 1.2rem !important;
+    }
+
+    .music-text {
+        font-size: 0.72rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    hr.pixel-divider {
+        margin: 0.8rem 0 1.2rem !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .container {
+        padding-left: 0.55rem !important;
+        padding-right: 0.55rem !important;
+    }
+
+    section {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+    }
+
+    .hero-image-stage {
+        padding: 0.35rem !important;
+    }
+}
+
+/* 减少移动端重绘压力 */
+@media (hover: none) and (pointer: coarse) {
+    .photo-frame img:hover {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -650,7 +884,7 @@ h1, h2, h3,
         <div class="hero-copy">
             <div class="hero-image-stage" airia-label="双人主图展示区域">
                 <img src="./assets/人名标题图像.png" 
-                     style="width:100%; height:100%;">
+                     style="width:100%; height:auto;" decoding="async" fetchpriority="high">
             </div>
         </div>
         <h1 class = "stardrew">✨ 星露谷物语·恋爱纪念 ✨</h1>
@@ -672,7 +906,7 @@ h1, h2, h3,
                 <div class="photo-frame">
                     <!-- 占位图，可自行替换为真实照片，悬停时image-rendering自动还原平滑 -->
                     <img src="./assets/47786.PNG" alt="春日野餐回忆" 
-                         style="width:100%; height:auto; background:#5c4e2e;">
+                         style="width:100%; height:auto; background:#5c4e2e;" loading="lazy" decoding="async">
                 </div>
                 <div class="memory-caption">
                     <p>🌻 <strong>「第一次春游·向日葵小径」</strong></p>
@@ -684,7 +918,7 @@ h1, h2, h3,
             <!-- 回忆条目2：照片与配文 偶数自动反向 右图左文 -->
             <div class="memory-item">
                 <div class="photo-frame">
-                    <img src="./assets/47786.PNG" alt="夏夜星河露营">
+                    <img src="./assets/47786.PNG" alt="夏夜星河露营" loading="lazy" decoding="async">
                 </div>
                 <div class="memory-caption">
                     <p>🏕️ <strong>「星露谷夏夜 · 银河露营」</strong></p>
@@ -696,7 +930,7 @@ h1, h2, h3,
             <!-- 回忆条目3 秋季丰收节 -->
             <div class="memory-item">
                 <div class="photo-frame">
-                    <img src="./assets/47786.PNG" alt="秋收节南瓜庆典">
+                    <img src="./assets/47786.PNG" alt="秋收节南瓜庆典" loading="lazy" decoding="async">
                 </div>
                 <div class="memory-caption">
                     <p>🎃 <strong>「秋收庆典 · 南瓜与誓言」</strong></p>
@@ -708,7 +942,7 @@ h1, h2, h3,
             <!-- 回忆条目4 冬日暖心回忆 -->
             <div class="memory-item">
                 <div class="photo-frame">
-                    <img src="./assets/47786.PNG" alt="冬日壁炉相依">
+                    <img src="./assets/47786.PNG" alt="冬日壁炉相依" loading="lazy" decoding="async">
                 </div>
                 <div class="memory-caption">
                     <p>❄️ <strong>「冬日雪绒花 · 小酒馆之夜」</strong></p>
@@ -720,7 +954,7 @@ h1, h2, h3,
             <!-- 额外增加一张纪念照（穿插）强调最后一年 -->
             <div class="memory-item">
                 <div class="photo-frame">
-                    <img src="./assets/47786.PNG" alt="周年纪念蛋糕">
+                    <img src="./assets/47786.PNG" alt="周年纪念蛋糕" loading="lazy" decoding="async">
                 </div>
                 <div class="memory-caption">
                     <p>🍰 <strong>「周年特供 · 像素蛋糕与未来」</strong></p>
@@ -748,7 +982,7 @@ h1, h2, h3,
         </div>
         <div style="margin-top: 16px; font-size: 0.75rem; color: #dba87a;">⭐ 每个像素都是心跳的形状，周年快乐 ⭐</div>
     </section>
-    <img src="./assets/底部作物图.png" alt="像素作物" style="display:block; max-width:90%; margin: -1.5rem auto 1.5rem; image-rendering:pixelated;">
+    <img src="./assets/底部作物图.png" alt="像素作物" style="display:block; max-width:90%; margin: -1.5rem auto 1.5rem; image-rendering:pixelated;" loading="lazy" decoding="async">
     <div class="footer-pixel">
         🌾 星露谷物语风格纪念册 | 向下滚动重温每一帧像素心动 🌾
     </div>
@@ -1038,9 +1272,9 @@ h1, h2, h3,
         document.title = `❤️ 恋爱 ${getDaysSinceStart(START_DATE_STR)}天 · 星露谷回忆录 ❤️`;
     })();
 </script>
+<script>
+    // 微信 iOS 触摸兼容优化
+    document.addEventListener('touchstart', function () {}, { passive: true });
+</script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 742c7f25540761d41a70dc2bc201a1c8ce5318f7
