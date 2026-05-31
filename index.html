@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+        <!-- 微信 / 移动端适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- iOS WebApp -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- 安卓状态栏颜色 -->
+    <meta name="theme-color" content="#000000">
+    <title>星露谷·恋爱周年纪念 | 我们的像素回忆录</title>
+    <style>
+        /* ================= 像素基础重置 & 星露谷风格 ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* 增强沉浸感，但不会影响文字选择 */
+        }
+        body {
+            background: #2d2e1e;  /* 星露谷深色泥土基底 */
+            font-family: 'Courier New', 'VT323', 'Press Start 2P', monospace;
+            color: #f9f3d9;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            /* 像素噪点纹理（模拟复古CRT） */
+            background-image: repeating-linear-gradient(0deg, rgba(60, 55, 30, 0.3) 0px, rgba(60, 55, 30, 0.3) 2px, transparent 2px, transparent 6px),
+                              repeating-linear-gradient(90deg, rgba(40, 35, 15, 0.2) 0px, rgba(40, 35, 15, 0.2) 1px, transparent 1px, transparent 4px);
+        }
+
+        /* 像素风容器主框架 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            background: rgba(45, 46, 30, 0.75);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 0 4px #6b4c3b, 0 0 0 8px #4a3a28;
+            border-image: none;
+        }
+
+        /* 区块通用样式 */
+        section {
+            margin-bottom: 4rem;
+            position: relative;
+            background: #3a3522c9;
+            padding: 1.8rem 1.8rem;
+            border: 4px solid #7b5f44;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.4);
+            transition: transform 0.1s step-end;
+        }
+
+        section:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.4);
+        }
+
+        /* 像素标题 */
+        h1, h2, .hero-title {
+            font-family: 'Courier New', 'Press Start 2P', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #fdd7a8;
+            margin-bottom: 1rem;
+        }
+        .stardew {
+            font-family: "FusionPixel";
+            font-size: 64px;
+
+            color: #4b2f18;
+
+            text-shadow:
+                /* 浅色高光 */
+                4px 4px 0 #d6b17c,
+
+                /* 描边 */
+                -2px -2px 0 #3a2414,
+                2px -2px 0 #3a2414,
+                -2px  2px 0 #3a2414,
+                2px  2px 0 #3a2414;
+
+            image-rendering: pixelated;
+
+            letter-spacing: 2px;
+        }
+        h2 {
+            font-size: 1.7rem;
+            border-left: 10px solid #f0b27a;
+            padding-left: 1rem;
+            margin-bottom: 1.8rem;
+            color: #ffe3b5;
+            text-shadow: 1px 1px 0 #3a2819;
+        }
+
+        /* Hero 区 - 纪念天数 */
+        .hero-area {
+            text-align: center;
+            background: #2b2a1ce6;
+            border: 6px double #cdb38c;
+            overflow: hidden;
+        }
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-block;
+            margin-bottom: 1.2rem;
+            padding: 0.45rem 1rem;
+            font-size: 0.82rem;
+            letter-spacing: 3px;
+            color: #ffe5a9;
+            background: linear-gradient(180deg, #6d4d2d 0%, #4b321d 100%);
+            border: 3px solid #d7b277;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+        }
+        .hero-image-stage {
+            width: min(100%, 760px);
+            margin: 0 auto 1.8rem;
+            padding: 1rem;
+            background:
+                linear-gradient(180deg, rgba(40, 58, 29, 0.88) 0%, rgba(28, 28, 18, 0.95) 100%);
+            border: 4px solid #e2bc82;
+            box-shadow: inset 0 0 0 4px #6a4727, 12px 12px 0 rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .hero-image-stage::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 2px dashed rgba(255, 234, 184, 0.45);
+            pointer-events: none;
+        }
+        .hero-image-placeholder {
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background:
+                radial-gradient(circle at top, rgba(255, 220, 150, 0.3), transparent 38%),
+                linear-gradient(180deg, #7bb0d9 0 44%, #9ed186 44% 70%, #7b5d36 70% 100%);
+            border: 4px solid #2f2317;
+            position: relative;
+            image-rendering: pixelated;
+            overflow: hidden;
+        }
+        .hero-image-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 4px, transparent 4px 8px),
+                repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 4px, transparent 4px 8px);
+            opacity: 0.5;
+        }
+        .hero-image-placeholder::after {
+            content: '把双人主图放在这里';
+            position: absolute;
+            left: 50%;
+            bottom: 1.1rem;
+            transform: translateX(-50%);
+            padding: 0.45rem 0.9rem;
+            font-size: 0.76rem;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            color: #fff0c7;
+            background: rgba(28, 22, 13, 0.84);
+            border: 2px solid #f0c785;
+        }
+        .hero-sprites {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+        .hero-sprite {
+            width: 112px;
+            height: 168px;
+            position: relative;
+            border: 4px solid rgba(42, 28, 16, 0.9);
+            box-shadow: 0 0 0 4px rgba(248, 223, 171, 0.24);
+        }
+        .hero-sprite-left {
+            background:
+                linear-gradient(180deg, transparent 0 16%, #5b3d22 16% 24%, #e4b48c 24% 38%, #d6e3f1 38% 62%, #7da4d9 62% 100%);
+        }
+        .hero-sprite-right {
+            background:
+                linear-gradient(180deg, transparent 0 16%, #70441f 16% 24%, #f0c19d 24% 38%, #f0d889 38% 62%, #6fb36f 62% 100%);
+        }
+        .hero-sprite::before,
+        .hero-sprite::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .hero-sprite::before {
+            top: 14px;
+            width: 44px;
+            height: 44px;
+            background: #efc39e;
+            box-shadow:
+                -24px 8px 0 -14px #1b1510,
+                24px 8px 0 -14px #1b1510,
+                0 46px 0 14px currentColor;
+        }
+        .hero-sprite-left::before {
+            color: #87aede;
+        }
+        .hero-sprite-right::before {
+            color: #76bb77;
+        }
+        .hero-stage-note {
+            margin-top: 1rem;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            color: #f2ddb2;
+        }
+        .days-counter {
+            background: #1f1e12;
+            display: inline-block;
+            min-width: 120px;
+            padding: 0.8rem 2rem;
+            margin-top: 1rem;
+            border-radius: 0px;
+            font-size: 3rem;
+            font-weight: bold;
+            font-family: monospace;
+            border: 3px solid #f3c26b;
+            box-shadow: inset 0 0 0 2px #5c4b2e, 0 8px 0 rgba(0,0,0,0.4);
+            color: #ffdd99;
+        }
+        .days-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            letter-spacing: 3px;
+        }
+        .start-hint {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            background: #1f1e12b3;
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+        }
+
+        /* 照片墙区 — 回忆流穿插排列 */
+        .memories-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
+        }
+        .memory-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.8rem;
+            background: #4340256b;
+            padding: 1.2rem;
+            border: 2px solid #b49164;
+            transition: all 0.2s;
+        }
+        /* 交错排列：奇数默认左图右文，偶数右图左文 */
+        .memory-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        /* 手机适配 */
+        @media (max-width: 700px) {
+            .memory-item, .memory-item:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-area {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .hero-image-placeholder {
+                min-height: 280px;
+            }
+            .hero-sprites {
+                gap: 1rem;
+            }
+            .hero-sprite {
+                width: 84px;
+                height: 132px;
+            }
+        }
+        .photo-frame {
+            flex: 1.2;
+            min-width: 200px;
+            background: #2c281a;
+            padding: 12px 12px 8px 12px;
+            border: 3px solid #ebc28e;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: crisp-edges;    /* 基础锐利 */
+            image-rendering: pixelated;      /* 默认像素风格块状感 */
+            transition: all 0.2s ease;
+            border: 1px solid #b67b3a;
+        }
+        /* 悬停像素还原：还原为平滑自然图像 */
+        .photo-frame img:hover,
+        .photo-frame img.smooth {
+            image-rendering: auto;
+            image-rendering: smooth;
+            filter: brightness(1.02) contrast(1.02);
+            transform: scale(1.01);
+        }
+        /* 移动端点击切换提示浮标 */
+        .photo-frame .tap-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(20, 18, 10, 0.82);
+            color: #f0d89a;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border: 1px solid #c9a55b;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+        .photo-frame .tap-hint.show {
+            opacity: 1;
+        }
+        /* 配文区域 */
+        .memory-caption {
+            flex: 1;
+            max-width: 400px;
+            background: #2c2b1ce0;
+            padding: 1.2rem;
+            border-left: 6px solid #ffc285;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            word-break: break-word;
+            box-shadow: inset 0 0 0 1px #b99962, 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .memory-caption p {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .memory-caption .quote {
+            font-style: italic;
+            /* color: #fbe5b9; */
+            font-weight: bold;
+            margin-top: 6px;
+            display: inline-block;
+        }
+
+        /* 底部寄语区 — 情书收尾 */
+        .love-letter {
+            border: 5px ridge #4a3020;
+            text-align: center;
+            font-size: 1.05rem;
+            padding: 2rem;
+            background: linear-gradient(180deg, #f5e3b0 0%, #dba87a 100%);
+        }
+        
+        .love-letter h2 {
+            display: inline-block;
+            /* background: #f5e3b0; */
+            padding: 0.4rem 1.2rem;
+            color: #4a3020;
+            /* text-shadow: 1px 1px 0 #dba87a; */
+            margin-bottom: 1.8rem;
+        }
+
+        .letter-content {
+            max-width: 85%;
+            margin: 0 auto;
+            background: #f5e3b0;
+            padding: 1.8rem;
+            border-radius: 0px;
+            box-shadow: inset 0 0 0 2px #c9a56b, 0 6px 0 rgba(0,0,0,0.4);
+            font-family: 'Courier New', 'VT323', 'Press Start 2P', monospace;
+            color: #4a3020;
+        }
+        .letter-content p {
+            margin: 1rem 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            letter-spacing: 0.5px;
+        }
+        .signature {
+            margin-top: 1.5rem;
+            font-family: 'Courier New', 'VT323', 'Press Start 2P', monospace;
+            font-weight: bold;
+            text-align: right;
+            font-size: 1.2rem;
+            border-top: 2px dashed #b8895c;
+            padding-top: 0.8rem;
+            display: inline-block;
+            width: 100%;
+            color: #4a3020;
+        }
+
+        /* 像素音乐开关 — 右下角浮动 */
+        .music-player {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            background: #2b281c;
+            border: 3px solid #f7cc86;
+            padding: 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-family: monospace;
+            font-weight: bold;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+            transition: all 0.05s linear;
+        }
+        .music-player:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+        }
+        .music-icon {
+            font-size: 1.6rem;
+            filter: drop-shadow(2px 2px 0 #000);
+        }
+        .music-text {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            background: #00000066;
+            padding: 4px 6px;
+        }
+
+        /* 像素风装饰线条 */
+        hr.pixel-divider {
+            border: none;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, #e7bc7e, #e7bc7e 8px, #7a5d3a 8px, #7a5d3a 16px);
+            margin: 1rem 0 2rem;
+        }
+
+        /* 底部小额签名 */
+        .footer-pixel {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #b68b54;
+        }
+
+        /* 实时天数 强调效果 */
+        @keyframes pixelFlash {
+            0% { text-shadow: 0 0 0 #ffb347; }
+            100% { text-shadow: 0 0 3px #ffcc77; }
+        }
+        .days-counter {
+            animation: pixelFlash 1.2s ease-in-out 1;
+        }
+
+        /* 自适配滚动留白 */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #211f12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a87b45;
+            border: 2px solid #4d361c;
+        }
+
+        /* 打字机光标 */
+        .typewriter-cursor::after {
+            content: '▍';
+            animation: blinkCursor 0.8s step-end infinite;
+            color: #6b4a2e;
+            margin-left: 2px;
+        }
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50%      { opacity: 1; }
+        }
+        .typewriter-cursor.done::after {
+            display: none;
+        }
+        .letter-content .tw-line {
+            min-height: 1.6em;
+        }
+    
+/* ===== 星露谷信封风格重制 ===== */
+body {
+    background:
+        linear-gradient(rgba(0,0,0,0.04), rgba(0,0,0,0.04)),
+        repeating-linear-gradient(
+            0deg,
+            #7fa35b 0px,
+            #7fa35b 24px,
+            #88ad63 24px,
+            #88ad63 48px
+        );
+    color: #3a2819 !important;
+}
+
+.container {
+    background: rgba(245, 232, 193, 0.92) !important;
+    border: 8px solid #6f4726 !important;
+    box-shadow:
+        0 0 0 4px #caa36b,
+        0 0 0 8px #4a2d17,
+        12px 12px 0 rgba(0,0,0,0.35) !important;
+}
+
+section {
+    background: #f2e3b6 !important;
+    border: 6px solid #6f4726 !important;
+    box-shadow:
+        inset 0 0 0 3px #d7b277,
+        8px 8px 0 rgba(0,0,0,0.28) !important;
+}
+
+.hero-area,
+.memory-item,
+.memory-caption,
+.letter-content,
+.photo-frame,
+.hero-image-stage,
+.music-player {
+    background: #efe0b2 !important;
+    border-color: #6f4726 !important;
+    color: #3b2414 !important;
+}
+
+h1, h2, h3,
+.hero-title,
+.memory-caption,
+.letter-content,
+.signature,
+.music-text {
+    color: #3b2414 !important;
+    text-shadow: none !important;
+}
+
+.days-counter {
+    background: #f7ebc8 !important;
+    color: #4a2d17 !important;
+    border: 4px solid #6f4726 !important;
+    box-shadow:
+        inset 0 0 0 2px #d7b277,
+        0 6px 0 rgba(0,0,0,0.25) !important;
+}
+
+.hero-badge,
+.start-hint,
+.music-text {
+    background: #6f4726 !important;
+    color: #f9e7b5 !important;
+    border: 2px solid #d7b277 !important;
+}
+
+.photo-frame img {
+    border: 3px solid #6f4726 !important;
+}
+
+.love-letter {
+    background: #f2deb0 !important;
+    border: 8px solid #6f4726 !important;
+}
+
+.pixel-divider {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #6f4726,
+            #6f4726 10px,
+            #d7b277 10px,
+            #d7b277 20px
+        ) !important;
+}
+
+
+/* ===== 起始日期提示框改为浅底深字 ===== */
+.start-hint {
+    background: #f7ebc8 !important;
+    color: #3b2414 !important;
+    border: 4px solid #6f4726 !important;
+    box-shadow:
+        inset 0 0 0 2px #d7b277,
+        6px 6px 0 rgba(0,0,0,0.22) !important;
+    font-weight: bold !important;
+    padding: 0.75rem 1.2rem !important;
+    line-height: 1.8 !important;
+}
+
+.start-hint *,
+.start-hint div,
+.start-hint span {
+    color: #3b2414 !important;
+    text-shadow: none !important;
+}
+
+.start-hint::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 2px solid #d7b277;
+    pointer-events: none;
+}
+
+
+/* ===== 顶部布局优化（移除双文本框后） ===== */
+.hero-area {
+    padding-top: 2.5rem !important;
+}
+
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.hero-image-stage {
+    margin-top: 0.2rem !important;
+}
+
+@media (max-width: 700px) {
+    .hero-area {
+        padding-top: 1.5rem !important;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero区 — 标题 + 实时纪念天数 -->
+    <section class="hero-area">
+        <div class="hero-copy">
+            <div class="hero-image-stage" airia-label="双人主图展示区域">
+                <img src="./assets/人名标题图像.png" 
+                     style="width:100%; height:100%;">
+            </div>
+        </div>
+        <h1 class = "stardrew">✨ 星露谷物语·恋爱纪念 ✨</h1>
+        <div class="days-counter" id="anniversaryDays">--</div>
+        <div class="days-label">💖 专属回忆天数 💖</div>
+        <div class="start-hint">
+            🌾 始于相遇之日 · 至今每一个像素都刻着爱 🌾
+        </div>
+        <hr class="pixel-divider">
+        <div style="font-size:0.85rem; margin-top:8px;">“像在鹈鹕镇种下的第一颗杨桃，我们的故事日日丰收”</div>
+    </section>
+
+    <!-- 回忆流区 — 照片与说明文字穿插排列，悬停像素还原 -->
+    <section>
+        <h2>📸 回忆流光 · 像素定格 📸</h2>
+        <div class="memories-grid">
+            <!-- 回忆条目1：照片 + 配文 左图右文（奇数） -->
+            <div class="memory-item">
+                <div class="photo-frame">
+                    <!-- 占位图，可自行替换为真实照片，悬停时image-rendering自动还原平滑 -->
+                    <img src="./assets/47786.PNG" alt="春日野餐回忆" 
+                         style="width:100%; height:auto; background:#5c4e2e;">
+                </div>
+                <div class="memory-caption">
+                    <p>🌻 <strong>「第一次春游·向日葵小径」</strong></p>
+                    <p>那天的阳光刚刚好，你笑着递来一束野花，风里有稻草人的歌声。<br>
+                    像素虽然模糊，但你的眼睛藏了整个夏天。</p>
+                    <span class="quote">—— 至今仍记得那份悸动</span>
+                </div>
+            </div>
+            <!-- 回忆条目2：照片与配文 偶数自动反向 右图左文 -->
+            <div class="memory-item">
+                <div class="photo-frame">
+                    <img src="./assets/47786.PNG" alt="夏夜星河露营">
+                </div>
+                <div class="memory-caption">
+                    <p>🏕️ <strong>「星露谷夏夜 · 银河露营」</strong></p>
+                    <p>躺在我们亲手搭的帐篷外，数满天的星星，你指着最亮的那颗说是我们的“新农场星”。<br>
+                    蝉鸣和像素风bgm里，第一次听见彼此的心跳。</p>
+                    <span class="quote">⭐ “我想和你一起收获每个季节的奇迹”</span>
+                </div>
+            </div>
+            <!-- 回忆条目3 秋季丰收节 -->
+            <div class="memory-item">
+                <div class="photo-frame">
+                    <img src="./assets/47786.PNG" alt="秋收节南瓜庆典">
+                </div>
+                <div class="memory-caption">
+                    <p>🎃 <strong>「秋收庆典 · 南瓜与誓言」</strong></p>
+                    <p>农场集市上赢了大南瓜，你做成灯笼刻上我们的名字。你说“像素世界里，我们永远是最佳农夫搭档”。<br>
+                    黄昏的余晖染红矮墙，甜蜜在空气里发酵。</p>
+                    <span class="quote">🍂 那个秋天，爱意结出最饱满的果实</span>
+                </div>
+            </div>
+            <!-- 回忆条目4 冬日暖心回忆 -->
+            <div class="memory-item">
+                <div class="photo-frame">
+                    <img src="./assets/47786.PNG" alt="冬日壁炉相依">
+                </div>
+                <div class="memory-caption">
+                    <p>❄️ <strong>「冬日雪绒花 · 小酒馆之夜」</strong></p>
+                    <p>星之果实餐吧里，握着热牛奶，窗外雪花飘落。共享一副耳机，听着像素OST，<br>
+                    你第一次轻声说“以后每个冬天都要一起度过”。</p>
+                    <span class="quote">☃️ 从那天起冬天不再寒冷</span>
+                </div>
+            </div>
+            <!-- 额外增加一张纪念照（穿插）强调最后一年 -->
+            <div class="memory-item">
+                <div class="photo-frame">
+                    <img src="./assets/47786.PNG" alt="周年纪念蛋糕">
+                </div>
+                <div class="memory-caption">
+                    <p>🍰 <strong>「周年特供 · 像素蛋糕与未来」</strong></p>
+                    <p>一起做的像素风周年蛋糕，甜度超标。你说哪怕1-bit画风，我们的故事也要渲染成最暖的篇章。<br>
+                    周年快乐，我永远的主角。</p>
+                    <span class="quote">❤️ 未完待续，下一帧依旧是你</span>
+                </div>
+            </div>
+        </div>
+        <hr class="pixel-divider" style="margin-top: 2rem;">
+        <div style="text-align: center; font-size: 0.9rem; color:#e7cfa1;">✨ 鼠标悬停 / 手指点击照片，像素魔方还原真实感动 ✨</div>
+    </section>
+
+    <!-- 底部寄语区 — 情书收尾 -->
+    <section class="love-letter" id="loveLetter">
+        <h2>💌 致 我永恒的农夫伴侣 💌</h2>
+        <div class="letter-content">
+            <p class="tw-line">亲爱的：</p>
+            <p class="tw-line">打开这本像素回忆录的时候，我们的世界又重叠了一次。鹈鹕镇的四季流转，正如我们共同走过的每一天——从春日第一株蓝莓发芽，到冬夜壁炉里噼啪作响的柴火，你都是我最珍贵的"上古水果"。</p>
+            <p class="tw-line">在那些8-bit风格的风里，我们曾一起钓鱼、采矿、布置小屋，现实中的喜怒哀乐也因为你变成温暖的存档点。谢谢你为我建造最舒服的"虚拟港湾"，也谢谢每一个早晨和夜晚的陪伴。未来无数个季节，我们还要一起耕地、一起收获，让爱的经验值无限上涨。</p>
+            <p class="tw-line">"和你在一起，所有平凡日常都染上像素柔光。" ❤️</p>
+            <div class="signature tw-line">
+                —— 永远爱你的伴侣 · 于星露谷纪念日
+            </div>
+        </div>
+        <div style="margin-top: 16px; font-size: 0.75rem; color: #dba87a;">⭐ 每个像素都是心跳的形状，周年快乐 ⭐</div>
+    </section>
+    <img src="./assets/底部作物图.png" alt="像素作物" style="display:block; max-width:90%; margin: -1.5rem auto 1.5rem; image-rendering:pixelated;">
+    <div class="footer-pixel">
+        🌾 星露谷物语风格纪念册 | 向下滚动重温每一帧像素心动 🌾
+    </div>
+</div>
+
+<!-- 像素风音乐开关 + 背景音乐 (星露谷OST风格 loop) -->
+<div class="music-player" id="musicToggle">
+    <span class="music-icon" id="musicIcon">🎵</span>
+    <span class="music-text" id="musicStatus">播放 BGM</span>
+</div>
+
+<script>
+    (function() {
+        // ======================= 配置区 =======================
+        // 恋爱纪念起始日期 (年-月-日) 请修改为您真正的纪念日 ❤️
+        const START_DATE_STR = '2025-06-14';   // 举例：2022年6月18日，可自行更改
+        // 背景音乐URL (星露谷风格OST 或 复古像素风音乐，loop)
+        // 使用可靠的无版权风险/公用的 Chiptune 风格音乐 (若链接失效可替换为自己的音乐地址)
+        // 当前链接为宽松使用的 8-bit 风格音乐示例 (音色类似星露谷农场背景)
+        const MUSIC_SRC = 'https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8c7345e.mp3?filename=video-game-8-bit-arcade-music-145300.mp3';
+        // 备用音乐链接（如果第一个失效，可替换，但大部分网络可访问）
+        // 注意：实际使用时用户可替换为任何喜爱的星露谷原声或类似音乐
+        // =======================================================
+
+        // ----- 实时纪念天数计算 -----
+        function getDaysSinceStart(startDateStr) {
+            const start = new Date(startDateStr);
+            const today = new Date();
+            // 重置时间部分，只比较日期
+            start.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            const diffTime = today - start;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays >= 0 ? diffDays : 0;
+        }
+
+        function updateDaysDisplay() {
+            const daysSpan = document.getElementById('anniversaryDays');
+            if (daysSpan) {
+                const days = getDaysSinceStart(START_DATE_STR);
+                daysSpan.innerText = `${days}`;
+                // 添加小彩蛋效果：如果天数显示后出现震动感（无伤大雅）
+                daysSpan.style.transform = 'scale(1.02)';
+                setTimeout(() => { if(daysSpan) daysSpan.style.transform = ''; }, 200);
+            }
+        }
+        updateDaysDisplay();
+
+        // ---------- 背景音乐逻辑 (完全符合用户交互 + 开关) ----------
+        let audioElement = null;
+        let isMusicPlaying = false;
+        const musicToggleBtn = document.getElementById('musicToggle');
+        const musicIconSpan = document.getElementById('musicIcon');
+        const musicStatusSpan = document.getElementById('musicStatus');
+
+        // 初始化音频 (不自动播放，等待用户点击)
+        function initAudio() {
+            if (audioElement) return audioElement;
+            const audio = new Audio();
+            audio.src = MUSIC_SRC;
+            audio.loop = true;          // 循环播放，营造农场沉浸感
+            audio.preload = 'auto';
+            audio.volume = 0.5;         // 适中音量，不扰人
+            // 处理加载失败，避免打断体验，但仍保留功能
+            audio.addEventListener('error', (e) => {
+                console.warn('音乐加载失败，请检查网络或替换音乐链接。但其他功能正常');
+                if (musicStatusSpan) musicStatusSpan.innerText = '⚠️ 音乐失效';
+            });
+            audioElement = audio;
+            return audioElement;
+        }
+
+        // 切换播放状态
+        function toggleMusic() {
+            const audio = initAudio();
+            if (!audio) return;
+
+            if (isMusicPlaying) {
+                audio.pause();
+                isMusicPlaying = false;
+                if (musicIconSpan) musicIconSpan.innerText = '🔇';
+                if (musicStatusSpan) musicStatusSpan.innerText = '音乐关';
+            } else {
+                // 播放音乐，处理浏览器自动播放策略: 使用Promise catch
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isMusicPlaying = true;
+                        if (musicIconSpan) musicIconSpan.innerText = '🎶';
+                        if (musicStatusSpan) musicStatusSpan.innerText = '星露谷BGM';
+                    }).catch(err => {
+                        console.warn('自动播放被阻止，请手动点击页面任意位置启用音乐', err);
+                        // 提供友好提示
+                        if (musicStatusSpan) musicStatusSpan.innerText = '点击页面激活';
+                        isMusicPlaying = false;
+                        // 设置短暂提示（不阻塞体验）
+                        alertifyFallback?.();
+                    });
+                } else {
+                    // 旧版浏览器
+                    isMusicPlaying = true;
+                    if (musicIconSpan) musicIconSpan.innerText = '🎶';
+                    if (musicStatusSpan) musicStatusSpan.innerText = '星露谷BGM';
+                }
+            }
+        }
+
+        function alertifyFallback() {
+            // 非侵入提示，在开关旁边展示小提示3秒
+            const statusDiv = musicStatusSpan;
+            if(statusDiv && statusDiv.innerText !== '播放 BGM') {
+                const originalText = statusDiv.innerText;
+                statusDiv.innerText = '🔊 需要手动允许';
+                setTimeout(() => {
+                    if(!isMusicPlaying && statusDiv) statusDiv.innerText = originalText;
+                }, 2000);
+            }
+        }
+
+        // 绑定音乐开关按钮事件
+        if (musicToggleBtn) {
+            musicToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMusic();
+            });
+        }
+
+        // 额外为了解决部分浏览器第一次播放必须由用户手势触发，而我们的开关已经提供该手势。完美。
+        // 另外为了提高“全程背景音乐”的沉浸感，如果用户第一次点击开关就能播放
+        // 但是如果用户尚未点击开关，不会有音乐自动播放，避免违反政策。
+        // 此外可以在页面任意区域双击启用音乐的额外提示，但没必要。用户体验明确：点击右下角开关播放ost。
+
+        // 优雅启动：初始化audio预加载但不播放，让用户主动开启，符合规范同时保证“全程背景音乐”通过开关轻松实现
+        initAudio();
+
+        // 增加装饰: 若浏览器控制播放失败或者已交互，保留初始状态
+        // 另外页面加载完成后检测是否存在自动播放失败 (再次在全局首次点击可自动尝试恢复) 
+        // 为了最佳体验，在文档body上监听一次点击，万一用户未找到开关？但确保隐私，只在开关触发。
+        // 以下可选增强：当用户与页面任何主要区域交互时，如果音乐未播放且上次因为策略未播放，不自动播放以尊重，不做过度。
+        // 但增加一个轻提醒：悬浮时也可提示。无所谓，用户自然知道开关。
+        
+        // 添加一个轻量级“像素化祝福”: 实时纪念天数展示，并且每过一天重新计算无额外开销
+        setInterval(() => {
+            // 每分钟更新一次天数（确保跨天刷新），而不需要刷新页面
+            const newDays = getDaysSinceStart(START_DATE_STR);
+            const daysSpan = document.getElementById('anniversaryDays');
+            if (daysSpan && parseInt(daysSpan.innerText) !== newDays) {
+                daysSpan.innerText = `${newDays}`;
+                daysSpan.style.animation = 'none';
+                daysSpan.offsetHeight;
+                daysSpan.style.animation = 'pixelFlash 0.6s ease';
+            }
+        }, 60000); // 每分钟检查一次
+
+        // 移动端触摸优化：已通过点击切换 .smooth class 实现（见下方代码）
+        // 桌面端保留 :hover 效果不变
+
+        // 若由于链接网络问题音乐无法播放，给予控制台友好提示但不影响整体观感
+        // 另外照片占位图的描述可以完全自定义：用户可一键替换所有img的src为自己的图片
+        // 加一段控制台温馨提醒，方便伴侣替换真实照片（提供给使用者）
+        console.log("%c✨ 星露谷纪念册已加载 ✨\n替换照片：找到所有 .photo-frame img 的 src 属性，换成你们的甜蜜合照！\n修改纪念日：代码顶部 START_DATE_STR 变量", "color: #ffb347; font-size: 14px; font-family: monospace;");
+        
+        // ---------- 移动端触摸优化：点击切换像素 / 高清模式 ----------
+        // 为每个 .photo-frame 添加提示浮标 + 点击切换
+        const allFrames = document.querySelectorAll('.photo-frame');
+        allFrames.forEach(frame => {
+            const img = frame.querySelector('img');
+            if (!img) return;
+
+            // 初始状态：像素风
+            img.classList.remove('smooth');
+
+            // 创建提示浮标
+            const hint = document.createElement('span');
+            hint.className = 'tap-hint';
+            hint.textContent = '👆 点击切换高清';
+            frame.appendChild(hint);
+
+            // 显示提示的定时器
+            let hintTimer = null;
+            function showHintTemporarily() {
+                hint.classList.add('show');
+                clearTimeout(hintTimer);
+                hintTimer = setTimeout(() => hint.classList.remove('show'), 1800);
+            }
+
+            // 点击切换 pixelated ↔ smooth
+            frame.addEventListener('click', (e) => {
+                // 如果点的是 caption 区域不触发
+                if (e.target.closest('.memory-caption')) return;
+                e.stopPropagation();
+
+                const isSmooth = img.classList.toggle('smooth');
+                img.style.imageRendering = isSmooth ? 'auto' : 'pixelated';
+                hint.textContent = isSmooth ? '🔍 点击还原像素' : '👆 点击切换高清';
+                showHintTemporarily();
+            });
+
+            // 首次加载后延迟显示一次提示（吸引移动端用户注意）
+            if (img.complete) {
+                setTimeout(showHintTemporarily, 1200);
+            } else {
+                img.addEventListener('load', () => setTimeout(showHintTemporarily, 1200), { once: true });
+            }
+        });
+        
+        // 此外，增加一个年份/纪念感性文字：在Hero区展示起始日期小字
+        const startDateObj = new Date(START_DATE_STR);
+        const startYear = startDateObj.getFullYear();
+        const startMonth = startDateObj.getMonth()+1;
+        const startDay = startDateObj.getDate();
+        const hintSpan = document.querySelector('.start-hint');
+        if(hintSpan) {
+            const extraSpan = document.createElement('div');
+            extraSpan.style.marginTop = '10px';
+            extraSpan.style.fontSize = '0.75rem';
+            extraSpan.style.opacity = '0.9';
+            extraSpan.innerHTML = `🌼 纪念日起点：${startYear}.${startMonth}.${startDay}  🌼`;
+            hintSpan.appendChild(extraSpan);
+        }
+        
+        // 为了让音乐开关更贴合星露谷，鼠标经过变化
+        const musicDiv = document.querySelector('.music-player');
+        if(musicDiv) {
+            musicDiv.addEventListener('mouseenter', () => {
+                musicDiv.style.transform = 'translate(-2px, -2px)';
+                musicDiv.style.boxShadow = '8px 8px 0 rgba(0,0,0,0.4)';
+            });
+            musicDiv.addEventListener('mouseleave', () => {
+                musicDiv.style.transform = '';
+                musicDiv.style.boxShadow = '6px 6px 0 rgba(0,0,0,0.4)';
+            });
+        }
+        
+        // ---------- 打字机效果：情书逐字出现 ----------
+        (function typewriter() {
+            const lines = document.querySelectorAll('.letter-content .tw-line');
+            if (!lines.length) return;
+
+            // 保存原文 → data-text，清空显示
+            lines.forEach(el => {
+                el.dataset.text = el.textContent.trim();
+                el.textContent = '';
+                el.classList.add('typewriter-cursor');
+            });
+
+            let lineIndex = 0;
+            let charIndex = 0;
+            let isTyping = false;
+
+            function typeNextChar() {
+                if (lineIndex >= lines.length) {
+                    lines.forEach(el => el.classList.remove('typewriter-cursor'));
+                    return;
+                }
+                isTyping = true;
+                const el = lines[lineIndex];
+                const fullText = el.dataset.text;
+                if (charIndex < fullText.length) {
+                    el.textContent += fullText[charIndex++];
+                    const delay = fullText[charIndex - 1].match(/[，。、！？；：""''（）、]/) ? 400 : 150;
+                    setTimeout(typeNextChar, delay);
+                } else {
+                    charIndex = 0;
+                    lineIndex++;
+                    el.classList.remove('typewriter-cursor');
+                    setTimeout(typeNextChar, 400);
+                }
+            }
+
+            const section = document.getElementById('loveLetter');
+            if (!section) return;
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !isTyping) {
+                    observer.disconnect();
+                    setTimeout(typeNextChar, 600);
+                }
+            }, { threshold: 0.3 });
+            observer.observe(section);
+        })();
+
+        // 动态更新页面标题
+        setInterval(() => {
+            const daysNow = getDaysSinceStart(START_DATE_STR);
+            document.title = `❤️ 恋爱 ${daysNow}天 · 星露谷回忆录 ❤️`;
+        }, 30000);
+        document.title = `❤️ 恋爱 ${getDaysSinceStart(START_DATE_STR)}天 · 星露谷回忆录 ❤️`;
+    })();
+</script>
+</body>
+</html>
